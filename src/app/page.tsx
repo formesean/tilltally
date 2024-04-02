@@ -19,11 +19,24 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "../components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../components/ui/alert-dialog";
+import { Separator } from "../components/ui/separator";
 import { Input } from "../components/ui/input";
 import productsList from "../data/productsList.json";
 import codes from "../data/codesList.json";
@@ -58,6 +71,15 @@ export default function Home() {
     new Date().toLocaleString()
   );
   const [discountCode, setDiscountCode] = useState("");
+  const [showToSDialog, setShowToSDialog] = useState(false);
+  const [agreedToToS, setAgreedToToS] = useState(false);
+
+  useEffect(() => {
+    const hasAgreedToToS = sessionStorage.getItem("agreedToToS");
+    if (!hasAgreedToToS) {
+      setShowToSDialog(true);
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -113,9 +135,213 @@ export default function Home() {
     setDiscountCode(e.target.value);
   };
 
+  const handleAgreeToToS = () => {
+    setAgreedToToS(true);
+    sessionStorage.setItem("agreedToToS", "true");
+    setShowToSDialog(false);
+  };
+
   return (
     <main className="h-screen flex flex-col items-center justify-center pt-24 p-10">
       <div className="z-10 w-full h-full justify-between gap-5 font-mono text-sm flex">
+        {/* EULA & ToS Dialog */}
+        <AlertDialog open={showToSDialog}>
+          <AlertDialogContent className="max-w-4xl max-h-[600px]">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="text-xl">
+                End-User Licensing Agreement (EULA) & Terms of Service (ToS)
+              </AlertDialogTitle>
+              <Separator />
+              <AlertDialogDescription className="text-base max-h-[500px] overflow-y-scroll pr-5">
+                <div className="py-3">
+                  <p className="text-justify text-slate-300">
+                    Welcome to the Point-of-Sale (POS) System provided by
+                    TeleGestoni Inc.! Before you proceed to use our system, we
+                    kindly ask you to review and accept our End-User Licensing
+                    Agreement (EULA) and Terms of Service (ToS). These
+                    agreements outline the terms and conditions that govern your
+                    use of our software and services. By accepting the EULA and
+                    ToS, you agree to comply with the rules and guidelines set
+                    forth by TeleGestoni Inc. regarding the use of our POS
+                    system. These agreements are designed to ensure a fair,
+                    secure, and enjoyable experience for all users. Please take
+                    a moment to review the EULA and ToS carefully. If you have
+                    any questions or concerns, feel free to reach out to our
+                    support team for assistance. Thank you for choosing
+                    TeleGestoni Inc. for your point-of-sale needs!
+                  </p>
+                </div>
+
+                <Separator />
+
+                {/* EULA */}
+                <div className="py-3">
+                  <h1 className="text-lg text-secondary-foreground">
+                    End-User Licensing Agreement (EULA)
+                  </h1>
+                  <p className="pt-3 text-slate-300">
+                    Important: Please read this End-User-License-Agreement
+                    (“EULA”) carefully before installing and or using the
+                    Point-of-Sale (POS) System. By installing or using the
+                    software, you agree to be bound by the terms and conditions
+                    of this agreement. If you do not agree to the terms and
+                    conditions of this agreement, do not install or use the
+                    system.
+                    <ol className="pt-3 flex flex-col gap-2">
+                      <li>
+                        1. LICENSE GRANT: Subject to the terms and conditions of
+                        this Agreement, [TELEGESTONI Inc] ("Licensor") grants
+                        you a non-exclusive, non-transferable, revocable license
+                        to use the Point-of-Sale (POS) System software
+                        ("Software") solely for your internal business purposes.
+                        This license does not include any right to sublicense,
+                        distribute, or otherwise transfer the Software to any
+                        third party.
+                      </li>
+                      <li>
+                        2. RESTRICTIONS: You shall not: a. Modify, adapt,
+                        translate, reverse engineer, decompile, disassemble or
+                        otherwise attempt to derive the source code of the
+                        Software; b. Use the Software in any manner that
+                        violates applicable laws or regulations; c. Remove or
+                        alter any copyright, trademark, or other proprietary
+                        notices contained in the Software; d. Rent, lease, lend,
+                        sell, redistribute, or sublicense the Software; e. Use
+                        the Software to develop any competing software product.
+                      </li>
+                      <li>
+                        3. OWNERSHIP: Licensor retains all right, title, and
+                        interest in and to the Software, including all
+                        intellectual property rights therein. This Agreement
+                        does not convey to you any rights of ownership in or
+                        related to the Software.
+                      </li>
+                      <li>
+                        4. SUPPORT AND MAINTENANCE: Licensor may provide support
+                        and maintenance services for the Software, at its sole
+                        discretion. Any such support and maintenance shall be
+                        subject to the terms of this Agreement and may be
+                        subject to additional fees.
+                      </li>
+                      <li>
+                        5. TERMINATION: This Agreement shall terminate
+                        automatically if you fail to comply with any of its
+                        terms and conditions. Upon termination, you shall cease
+                        all use of the Software and destroy all copies of the
+                        Software in your possession or control.
+                      </li>
+                      <li>
+                        6. ENTIRE AGREEMENT: This Agreement constitutes the
+                        entire agreement between the parties concerning the
+                        subject matter hereof and supersedes all prior or
+                        contemporaneous agreements or understandings, written or
+                        oral, concerning such subject matter. By installing or
+                        using the Software, you acknowledge that you have read
+                        this Agreement, understand it, and agree to be bound by
+                        its terms and conditions. If you have any questions
+                        regarding this Agreement, please contact the TELEGESTONI
+                        Inc Support Staff.
+                      </li>
+                    </ol>
+                  </p>
+                </div>
+
+                <Separator />
+
+                {/* ToS */}
+                <div className="pt-3">
+                  <h1 className="text-lg text-secondary-foreground">
+                    Terms of Service (ToS)
+                  </h1>
+                  <p className="pt-3 text-slate-300">
+                    <ol className="pt-3 flex flex-col gap-2">
+                      <li>
+                        1. Acceptance of Terms By accessing or using the POS
+                        system provided by TeleGestoni Inc., you agree to abide
+                        by these Terms of Service. If you do not agree with any
+                        part of these terms, you may not use the system.
+                      </li>
+                      <li>
+                        2. User Accounts and Access a. Users must create an
+                        account to access certain features of the POS system. b.
+                        User accounts are for individual use only and should not
+                        be shared with others. c. Users are responsible for
+                        maintaining the security of their account credentials.
+                      </li>
+                      <li>
+                        3. Data Security and Privacy a. TeleGestoni Inc. is
+                        committed to protecting user data and complies with
+                        relevant data protection laws. b. User data collected
+                        through the POS system will be used for transaction
+                        processing and internal analytics only. c. Payment
+                        information is encrypted and securely processed in
+                        compliance with industry standards.
+                      </li>
+                      <li>
+                        4. Usage Guidelines a. Users must use the POS system
+                        only for lawful purposes and in compliance with
+                        applicable laws and regulations. b. Unauthorized access,
+                        tampering with system settings, or misuse of the system
+                        is strictly prohibited. c. The POS system is intended
+                        for processing apparel sales transactions and related
+                        activities.
+                      </li>
+                      <li>
+                        5. Intellectual Property a. The POS system and all
+                        related software, trademarks, and content are the
+                        property of TeleGestoni Inc.. b. Users may not copy,
+                        modify, distribute, or reverse engineer the system
+                        without explicit permission.
+                      </li>
+                      <li>
+                        6. Limitation of Liability a. TeleGestoni Inc. is not
+                        liable for any damages arising from system downtime,
+                        data breaches, or technical issues. b. Users are
+                        responsible for their use of the system and any
+                        consequences thereof.
+                      </li>
+                      <li>
+                        7. Termination a. TeleGestoni Inc. reserves the right to
+                        suspend or terminate user accounts for violations of
+                        these terms or for other reasons deemed necessary. b.
+                        Upon termination, users may lose access to their data
+                        stored within the POS system.
+                      </li>
+                      <li>
+                        8. Updates and Modifications a. These terms may be
+                        updated or modified by TeleGestoni Inc. from time to
+                        time without prior notice. b. Users will be notified of
+                        significant changes to the terms, and continued use of
+                        the system constitutes acceptance of the updated terms.
+                      </li>
+                      <li>
+                        9. Governing Law a. These terms shall be governed by and
+                        construed in accordance with the laws of the
+                        Philippines. b. Any disputes arising from these terms
+                        shall be resolved through arbitration in the
+                        Philippines.
+                      </li>
+                      <li>
+                        10. Contact Information For questions or inquiries
+                        regarding these Terms of Service, please contact
+                        TeleGestoni Inc. at [Contact Email or Phone Number].
+                      </li>
+                    </ol>
+                  </p>
+                </div>
+
+                <Separator />
+
+                <div className="flex justify-end py-3">
+                  <AlertDialogAction onClick={handleAgreeToToS}>
+                    Accept
+                  </AlertDialogAction>
+                </div>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+          </AlertDialogContent>
+        </AlertDialog>
+
         {/* Products Lists View */}
         <div className="grid grid-cols-3 auto-rows-auto gap-5 w-full max-h-full overflow-y-scroll pr-5">
           {productsList.map((product, index) => (

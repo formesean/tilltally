@@ -1,62 +1,92 @@
 [
   {
     "title": "T-Shirt",
-    "desc": "Comfortable and stylish"
+    "desc": "Comfortable and stylish",
+    "tba": false,
+    "route": "/t-shirt"
   },
   {
     "title": "Hoodie",
-    "desc": "Stay warm in the cold"
+    "desc": "Stay warm in the cold",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Pants",
-    "desc": "Comfortable and versatile"
+    "desc": "Comfortable and versatile",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Cardigan",
-    "desc": "Stylish and cozy"
+    "desc": "Stylish and cozy",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Shorts",
-    "desc": "Perfect for warm weather"
+    "desc": "Perfect for warm weather",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Socks",
-    "desc": "Keep your feet cozy"
+    "desc": "Keep your feet cozy",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Dress",
-    "desc": "Elegant and classy"
+    "desc": "Elegant and classy",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Jacket",
-    "desc": "Protects you from the elements"
+    "desc": "Protects you from the elements",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Skirt",
-    "desc": "Flattering and versatile"
+    "desc": "Flattering and versatile",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Jeans",
-    "desc": "Classic and durable"
+    "desc": "Classic and durable",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Sweater",
-    "desc": "Warm and stylish"
+    "desc": "Warm and stylish",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Hat",
-    "desc": "Complete your look"
+    "desc": "Complete your look",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Gloves",
-    "desc": "Keep your hands warm"
+    "desc": "Keep your hands warm",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Scarf",
-    "desc": "Add style to your outfit"
+    "desc": "Add style to your outfit",
+    "tba": true,
+    "route": ""
   },
   {
     "title": "Blouse",
-    "desc": "Perfect for formal occasions"
+    "desc": "Perfect for formal occasions",
+    "tba": true,
+    "route": ""
   }
 ]

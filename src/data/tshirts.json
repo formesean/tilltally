@@ -1,0 +1,30 @@
+[
+  {
+    "brand": "Adidas",
+    "product_name": "Badge of Sport Tee",
+    "price": 550.0,
+    "color": "White",
+    "size": ["S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Under Armour",
+    "product_name": "Tech 2.0 Short Sleeve T-Shirt",
+    "price": 499.99,
+    "color": "Red",
+    "size": ["S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Puma",
+    "product_name": "Essentials Logo Tee",
+    "price": 650.0,
+    "color": "Black",
+    "size": ["XS", "S", "M", "L"]
+  },
+  {
+    "brand": "Hanes",
+    "product_name": "ComfortSoft Short Sleeve T-Shirt",
+    "price": 1000.0,
+    "color": "Navy",
+    "size": ["S", "M", "L", "XL"]
+  }
+]

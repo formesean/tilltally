@@ -1,6 +1,6 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { Button } from "../components/ui/button";
+import { useEffect, useState } from "react";
+import { Button } from "../../components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,13 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu";
+} from "../../components/ui/card";
 import {
   Dialog,
   DialogClose,
@@ -23,12 +17,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../components/ui/dialog";
-import { Input } from "../components/ui/input";
-import productsList from "../data/productsList.json";
-import codes from "../data/codesList.json";
-import { useEffect, useState } from "react";
-import { MoreHorizontal } from "lucide-react";
+} from "../../components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../../components/ui/dropdown-menu";
+import { Input } from "../../components/ui/input";
+import { MoreHorizontal, ArrowLeftToLine } from "lucide-react";
+import tshirts from "../../data/tshirts.json";
+import codes from "../../data/codesList.json";
+import { useRouter } from "next/navigation";
 
 interface Product {
   brand: string;
@@ -45,6 +45,8 @@ interface CartItem {
 
 export default function Home() {
   const router = useRouter();
+  const [openItem, setOpenItem] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<CartItem[]>(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("cart");
@@ -63,18 +65,23 @@ export default function Home() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const handleProductClick = (route: string) => {
-    router.replace(route);
+  const toggleDialog = (product: Product) => {
+    setSelectedProduct(product);
+    setOpenItem(!openItem);
+  };
+
+  const addToCart = (size: string) => {
+    if (selectedProduct) {
+      const item: CartItem = { product: selectedProduct, size };
+      setCart([...cart, item]);
+      setOpenItem(false);
+    }
   };
 
   const removeItem = (index: number) => {
     const updatedCart = [...cart];
     updatedCart.splice(index, 1);
     setCart(updatedCart);
-  };
-
-  const updateDateTime = () => {
-    setCurrentDateTime(new Date().toLocaleString());
   };
 
   const applyDiscount = (code: string): number => {
@@ -109,41 +116,37 @@ export default function Home() {
     return localizedTotalPrice;
   };
 
+  const updateDateTime = () => {
+    setCurrentDateTime(new Date().toLocaleString());
+  };
+
   const handleDiscountCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDiscountCode(e.target.value);
   };
 
+  const handleBack = () => {
+    router.push("/");
+  };
+
   return (
-    <main className="h-screen flex flex-col items-center justify-center pt-24 p-10">
-      <div className="z-10 w-full h-full justify-between gap-5 font-mono text-sm flex">
-        {/* Products Lists View */}
+    <main className="h-screen flex flex-col items-start justify-center pt-24 p-10">
+      <Button onClick={handleBack} className="mb-5 px-3">
+        <ArrowLeftToLine className="h-4 w-4" />
+      </Button>
+      <div className="z-10 w-full h-full justify-between gap-5 font-mono text-sm lg:flex">
+        {/* T-Shirts Lists View */}
         <div className="grid grid-cols-3 auto-rows-auto gap-5 w-full max-h-full overflow-y-scroll pr-5">
-          {productsList.map((product, index) => (
-            <div key={index} className="relative">
-              {product.tba ? (
-                <div className="select-none">
-                  <span className="absolute top-0 left-0 bg-red-500 text-white py-1 px-2 z-10">
-                    Coming Soon
-                  </span>
-                  <Card className="w-[203.3px] h-[108px]">
-                    <CardHeader>
-                      <CardTitle>{product.title}</CardTitle>
-                      <CardDescription>{product.desc}</CardDescription>
-                    </CardHeader>
-                  </Card>
-                </div>
-              ) : (
-                <Card
-                  className="w-[203.3px] h-[108px] hover:cursor-pointer"
-                  onClick={() => handleProductClick(product.route)}
-                >
-                  <CardHeader>
-                    <CardTitle>{product.title}</CardTitle>
-                    <CardDescription>{product.desc}</CardDescription>
-                  </CardHeader>
-                </Card>
-              )}
-            </div>
+          {tshirts.map((product, index) => (
+            <Card
+              className="hover:cursor-pointer"
+              onClick={() => toggleDialog(product)}
+              key={index}
+            >
+              <CardHeader>
+                <CardTitle>{product.brand}</CardTitle>
+                <CardDescription>{product.product_name}</CardDescription>
+              </CardHeader>
+            </Card>
           ))}
         </div>
 
@@ -274,6 +277,37 @@ export default function Home() {
             </Dialog>
           </CardFooter>
         </Card>
+
+        {/* Item Dialog View */}
+        <Dialog open={openItem} onOpenChange={() => setOpenItem(!openItem)}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{selectedProduct?.brand}</DialogTitle>
+            </DialogHeader>
+            <div className="flex flex-col gap-4">
+              <div>Product Name: {selectedProduct?.product_name}</div>
+              <div>
+                Price: ₱
+                {selectedProduct?.price.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                })}
+              </div>
+              <div>Color: {selectedProduct?.color}</div>
+              <div>
+                Sizes:{" "}
+                {selectedProduct?.size.map((size, index) => (
+                  <Button
+                    key={index}
+                    className="mr-2 mb-2"
+                    onClick={() => addToCart(size)}
+                  >
+                    {size}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </main>
   );

@@ -20,7 +20,6 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -28,16 +27,14 @@ import {
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "../components/ui/alert-dialog";
 import { Separator } from "../components/ui/separator";
 import { Input } from "../components/ui/input";
+import { Checkbox } from "../components/ui/checkbox";
 import productsList from "../data/productsList.json";
 import codes from "../data/codesList.json";
 import { useEffect, useState } from "react";
@@ -73,6 +70,8 @@ export default function Home() {
   const [discountCode, setDiscountCode] = useState("");
   const [showToSDialog, setShowToSDialog] = useState(false);
   const [agreedToToS, setAgreedToToS] = useState(false);
+  const [eulaChecked, setEulaChecked] = useState(false);
+  const [tosChecked, setTosChecked] = useState(false);
 
   useEffect(() => {
     const hasAgreedToToS = sessionStorage.getItem("agreedToToS");
@@ -136,9 +135,11 @@ export default function Home() {
   };
 
   const handleAgreeToToS = () => {
-    setAgreedToToS(true);
-    sessionStorage.setItem("agreedToToS", "true");
-    setShowToSDialog(false);
+    if (eulaChecked && tosChecked) {
+      setAgreedToToS(true);
+      sessionStorage.setItem("agreedToToS", "true");
+      setShowToSDialog(false);
+    }
   };
 
   return (
@@ -154,7 +155,7 @@ export default function Home() {
               <Separator />
               <AlertDialogDescription className="text-base max-h-[500px] overflow-y-scroll pr-5">
                 <div className="py-3">
-                  <p className="text-justify text-slate-300">
+                  <p className="text-justify dark:text-slate-300">
                     Welcome to the Point-of-Sale (POS) System provided by
                     TeleGestoni Inc.! Before you proceed to use our system, we
                     kindly ask you to review and accept our End-User Licensing
@@ -176,10 +177,10 @@ export default function Home() {
 
                 {/* EULA */}
                 <div className="py-3">
-                  <h1 className="text-lg text-secondary-foreground">
+                  <h1 className="text-lg font-semibold text-secondary-foreground">
                     End-User Licensing Agreement (EULA)
                   </h1>
-                  <p className="pt-3 text-slate-300">
+                  <p className="pt-3 dark:text-slate-300">
                     Important: Please read this End-User-License-Agreement
                     (“EULA”) carefully before installing and or using the
                     Point-of-Sale (POS) System. By installing or using the
@@ -249,11 +250,11 @@ export default function Home() {
                 <Separator />
 
                 {/* ToS */}
-                <div className="pt-3">
-                  <h1 className="text-lg text-secondary-foreground">
+                <div className="py-3">
+                  <h1 className="text-lg font-semibold text-secondary-foreground">
                     Terms of Service (ToS)
                   </h1>
-                  <p className="pt-3 text-slate-300">
+                  <p className="pt-3 dark:text-slate-300">
                     <ol className="pt-3 flex flex-col gap-2">
                       <li>
                         1. Acceptance of Terms By accessing or using the POS
@@ -332,8 +333,40 @@ export default function Home() {
 
                 <Separator />
 
+                <div className="flex justify-center items-center gap-3 py-10">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="eula"
+                      checked={eulaChecked}
+                      onCheckedChange={() => setEulaChecked(!eulaChecked)}
+                    />
+                    <label
+                      htmlFor="eula"
+                      className="text-sm text-slate-900 dark:text-secondary-foreground font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Accept End-User Licensing Agreement
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="tos"
+                      checked={tosChecked}
+                      onCheckedChange={() => setTosChecked(!tosChecked)}
+                    />
+                    <label
+                      htmlFor="tos"
+                      className="text-sm text-slate-900 dark:text-secondary-foreground font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Accept Terms of Service
+                    </label>
+                  </div>
+                </div>
+
                 <div className="flex justify-end py-3">
-                  <AlertDialogAction onClick={handleAgreeToToS}>
+                  <AlertDialogAction
+                    onClick={handleAgreeToToS}
+                    disabled={!(tosChecked && eulaChecked)}
+                  >
                     Accept
                   </AlertDialogAction>
                 </div>

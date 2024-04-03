@@ -190,58 +190,88 @@ export default function Home() {
                     system.
                     <ol className="pt-3 flex flex-col gap-2">
                       <li>
-                        1. LICENSE GRANT: Subject to the terms and conditions of
-                        this Agreement, [TELEGESTONI Inc] ("Licensor") grants
-                        you a non-exclusive, non-transferable, revocable license
-                        to use the Point-of-Sale (POS) System software
-                        ("Software") solely for your internal business purposes.
-                        This license does not include any right to sublicense,
-                        distribute, or otherwise transfer the Software to any
-                        third party.
+                        1. LICENSE GRANT:{" "}
+                        <span className="block pl-5">
+                          Subject to the terms and conditions of this Agreement,
+                          [TELEGESTONI Inc] ("Licensor") grants you a
+                          non-exclusive, non-transferable, revocable license to
+                          use the Point-of-Sale (POS) System software
+                          ("Software") solely for your internal business
+                          purposes. This license does not include any right to
+                          sublicense, distribute, or otherwise transfer the
+                          Software to any third party.
+                        </span>
                       </li>
                       <li>
-                        2. RESTRICTIONS: You shall not: a. Modify, adapt,
-                        translate, reverse engineer, decompile, disassemble or
-                        otherwise attempt to derive the source code of the
-                        Software; b. Use the Software in any manner that
-                        violates applicable laws or regulations; c. Remove or
-                        alter any copyright, trademark, or other proprietary
-                        notices contained in the Software; d. Rent, lease, lend,
-                        sell, redistribute, or sublicense the Software; e. Use
-                        the Software to develop any competing software product.
+                        2. RESTRICTIONS:
+                        <ol className="pl-5">
+                          <li>You shall not:</li>
+                          <li className="pl-5">
+                            a. Modify, adapt, translate, reverse engineer,
+                            decompile, disassemble or otherwise attempt to
+                            derive the source code of the Software;
+                          </li>
+                          <li className="pl-5">
+                            b. Use the Software in any manner that violates
+                            applicable laws or regulations;
+                          </li>
+                          <li className="pl-5">
+                            c. Remove or alter any copyright, trademark, or
+                            other proprietary notices contained in the Software;
+                          </li>
+                          <li className="pl-5">
+                            d. Rent, lease, lend, sell, redistribute, or
+                            sublicense the Software;
+                          </li>
+                          <li className="pl-5">
+                            e. Use the Software to develop any competing
+                            software product.
+                          </li>
+                        </ol>
                       </li>
                       <li>
-                        3. OWNERSHIP: Licensor retains all right, title, and
-                        interest in and to the Software, including all
-                        intellectual property rights therein. This Agreement
-                        does not convey to you any rights of ownership in or
-                        related to the Software.
+                        3. OWNERSHIP:{" "}
+                        <span className="block pl-5">
+                          Licensor retains all right, title, and interest in and
+                          to the Software, including all intellectual property
+                          rights therein. This Agreement does not convey to you
+                          any rights of ownership in or related to the Software.
+                        </span>
                       </li>
                       <li>
-                        4. SUPPORT AND MAINTENANCE: Licensor may provide support
-                        and maintenance services for the Software, at its sole
-                        discretion. Any such support and maintenance shall be
-                        subject to the terms of this Agreement and may be
-                        subject to additional fees.
+                        4. SUPPORT AND MAINTENANCE:{" "}
+                        <span className="block pl-5">
+                          Licensor may provide support and maintenance services
+                          for the Software, at its sole discretion. Any such
+                          support and maintenance shall be subject to the terms
+                          of this Agreement and may be subject to additional
+                          fees.
+                        </span>
                       </li>
                       <li>
-                        5. TERMINATION: This Agreement shall terminate
-                        automatically if you fail to comply with any of its
-                        terms and conditions. Upon termination, you shall cease
-                        all use of the Software and destroy all copies of the
-                        Software in your possession or control.
+                        5. TERMINATION:{" "}
+                        <span className="block pl-5">
+                          This Agreement shall terminate automatically if you
+                          fail to comply with any of its terms and conditions.
+                          Upon termination, you shall cease all use of the
+                          Software and destroy all copies of the Software in
+                          your possession or control.
+                        </span>
                       </li>
                       <li>
-                        6. ENTIRE AGREEMENT: This Agreement constitutes the
-                        entire agreement between the parties concerning the
-                        subject matter hereof and supersedes all prior or
-                        contemporaneous agreements or understandings, written or
-                        oral, concerning such subject matter. By installing or
-                        using the Software, you acknowledge that you have read
-                        this Agreement, understand it, and agree to be bound by
-                        its terms and conditions. If you have any questions
-                        regarding this Agreement, please contact the TELEGESTONI
-                        Inc Support Staff.
+                        6. ENTIRE AGREEMENT:{" "}
+                        <span className="block pl-5">
+                          This Agreement constitutes the entire agreement
+                          between the parties concerning the subject matter
+                          hereof and supersedes all prior or contemporaneous
+                          agreements or understandings, written or oral,
+                          concerning such subject matter. By installing or using
+                          the Software, you acknowledge that you have read this
+                          Agreement, understand it, and agree to be bound by its
+                          terms and conditions. If you have any questions
+                          regarding this Agreement, please contact the
+                          TELEGESTONI Inc Support Staff.
+                        </span>
                       </li>
                     </ol>
                   </p>
@@ -257,75 +287,147 @@ export default function Home() {
                   <p className="pt-3 dark:text-slate-300">
                     <ol className="pt-3 flex flex-col gap-2">
                       <li>
-                        1. Acceptance of Terms By accessing or using the POS
-                        system provided by TeleGestoni Inc., you agree to abide
-                        by these Terms of Service. If you do not agree with any
-                        part of these terms, you may not use the system.
+                        1. Acceptance of Terms:
+                        <span className="block pl-5">
+                          By accessing or using the POS system provided by
+                          TeleGestoni Inc., you agree to abide by these Terms of
+                          Service. If you do not agree with any part of these
+                          terms, you may not use the system.
+                        </span>
                       </li>
                       <li>
-                        2. User Accounts and Access a. Users must create an
-                        account to access certain features of the POS system. b.
-                        User accounts are for individual use only and should not
-                        be shared with others. c. Users are responsible for
-                        maintaining the security of their account credentials.
+                        2. User Accounts and Access:
+                        <ol className="pl-5">
+                          <li>
+                            a. Users must create an account to access certain
+                            features of the POS system.
+                          </li>
+                          <li>
+                            b. User accounts are for individual use only and
+                            should not be shared with others.
+                          </li>
+                          <li>
+                            c. Users are responsible for maintaining the
+                            security of their account credentials.
+                          </li>
+                        </ol>
                       </li>
                       <li>
-                        3. Data Security and Privacy a. TeleGestoni Inc. is
-                        committed to protecting user data and complies with
-                        relevant data protection laws. b. User data collected
-                        through the POS system will be used for transaction
-                        processing and internal analytics only. c. Payment
-                        information is encrypted and securely processed in
-                        compliance with industry standards.
+                        3. Data Security and Privacy:
+                        <ol className="pl-5">
+                          <li>
+                            a. TeleGestoni Inc. is committed to protecting user
+                            data and complies with relevant data protection
+                            laws.
+                          </li>
+                          <li>
+                            b. User data collected through the POS system will
+                            be used for transaction processing and internal
+                            analytics only.
+                          </li>
+                          <li>
+                            c. Payment information is encrypted and securely
+                            processed in compliance with industry standards.
+                          </li>
+                        </ol>
                       </li>
                       <li>
-                        4. Usage Guidelines a. Users must use the POS system
-                        only for lawful purposes and in compliance with
-                        applicable laws and regulations. b. Unauthorized access,
-                        tampering with system settings, or misuse of the system
-                        is strictly prohibited. c. The POS system is intended
-                        for processing apparel sales transactions and related
-                        activities.
+                        4. Usage Guidelines:
+                        <ol className="pl-5">
+                          <li>
+                            a. Users must use the POS system only for lawful
+                            purposes and in compliance with applicable laws and
+                            regulations.
+                          </li>
+                          <li>
+                            b. Unauthorized access, tampering with system
+                            settings, or misuse of the system is strictly
+                            prohibited.
+                          </li>
+                          <li>
+                            c. The POS system is intended for processing apparel
+                            sales transactions and related activities.
+                          </li>
+                        </ol>
                       </li>
                       <li>
-                        5. Intellectual Property a. The POS system and all
-                        related software, trademarks, and content are the
-                        property of TeleGestoni Inc.. b. Users may not copy,
-                        modify, distribute, or reverse engineer the system
-                        without explicit permission.
+                        5. Intellectual Property
+                        <ol className="pl-5">
+                          <li>
+                            a. The POS system and all related software,
+                            trademarks, and content are the property of
+                            TeleGestoni Inc..
+                          </li>
+                          <li>
+                            b. Users may not copy, modify, distribute, or
+                            reverse engineer the system without explicit
+                            permission.
+                          </li>
+                        </ol>
                       </li>
                       <li>
-                        6. Limitation of Liability a. TeleGestoni Inc. is not
-                        liable for any damages arising from system downtime,
-                        data breaches, or technical issues. b. Users are
-                        responsible for their use of the system and any
-                        consequences thereof.
+                        6. Limitation of Liability:
+                        <ol className="pl-5">
+                          <li>
+                            a. TeleGestoni Inc. is not liable for any damages
+                            arising from system downtime, data breaches, or
+                            technical issues.
+                          </li>
+                          <li>
+                            b. Users are responsible for their use of the system
+                            and any consequences thereof.
+                          </li>
+                        </ol>
                       </li>
                       <li>
-                        7. Termination a. TeleGestoni Inc. reserves the right to
-                        suspend or terminate user accounts for violations of
-                        these terms or for other reasons deemed necessary. b.
-                        Upon termination, users may lose access to their data
-                        stored within the POS system.
+                        7. Termination:
+                        <ol className="pl-5">
+                          <li>
+                            a. TeleGestoni Inc. reserves the right to suspend or
+                            terminate user accounts for violations of these
+                            terms or for other reasons deemed necessary.
+                          </li>
+                          <li>
+                            b. Upon termination, users may lose access to their
+                            data stored within the POS system.
+                          </li>
+                        </ol>
                       </li>
                       <li>
-                        8. Updates and Modifications a. These terms may be
-                        updated or modified by TeleGestoni Inc. from time to
-                        time without prior notice. b. Users will be notified of
-                        significant changes to the terms, and continued use of
-                        the system constitutes acceptance of the updated terms.
+                        8. Updates and Modifications:
+                        <ol className="pl-5">
+                          <li>
+                            a. These terms may be updated or modified by
+                            TeleGestoni Inc. from time to time without prior
+                            notice.
+                          </li>
+                          <li>
+                            b. Users will be notified of significant changes to
+                            the terms, and continued use of the system
+                            constitutes acceptance of the updated terms.
+                          </li>
+                        </ol>
                       </li>
                       <li>
-                        9. Governing Law a. These terms shall be governed by and
-                        construed in accordance with the laws of the
-                        Philippines. b. Any disputes arising from these terms
-                        shall be resolved through arbitration in the
-                        Philippines.
+                        9. Governing Law:
+                        <ol className="pl-5">
+                          <li>
+                            a. These terms shall be governed by and construed in
+                            accordance with the laws of the Philippines.
+                          </li>
+                          <li>
+                            b. Any disputes arising from these terms shall be
+                            resolved through arbitration in the Philippines.
+                          </li>
+                        </ol>
                       </li>
                       <li>
-                        10. Contact Information For questions or inquiries
-                        regarding these Terms of Service, please contact
-                        TeleGestoni Inc. at [Contact Email or Phone Number].
+                        10. Contact Information:
+                        <span className="block pl-5">
+                          For questions or inquiries regarding these Terms of
+                          Service, please contact TeleGestoni Inc. at [Contact
+                          Email or Phone Number].
+                        </span>
                       </li>
                     </ol>
                   </p>

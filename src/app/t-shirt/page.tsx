@@ -47,6 +47,7 @@ interface CheckoutData {
   dateTime: string;
   cashierName: string;
   items: CartItem[];
+  code: string;
   total: number;
 }
 
@@ -145,6 +146,7 @@ export default function Home() {
       dateTime: currentDateTime,
       cashierName: cashierName,
       items: cart,
+      code: discountCode,
       total: total,
     };
 

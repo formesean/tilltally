@@ -46,6 +46,8 @@ export default function Transactions() {
                 <TableHead>Cashier Name</TableHead>
                 <TableHead>Items</TableHead>
                 <TableHead>Total</TableHead>
+                <TableHead>Promo Code</TableHead>
+                <TableHead></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -63,6 +65,7 @@ export default function Transactions() {
                     </ul>
                   </TableCell>
                   <TableCell>₱{transaction.total.toFixed(2)}</TableCell>
+                  <TableCell>{transaction.code}</TableCell>
                   <TableCell>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>

@@ -142,9 +142,13 @@ export default function Home() {
     }
   };
 
+  const handleClearCart = () => {
+    setCart([]);
+  };
+
   return (
     <main className="h-screen flex flex-col items-center justify-center pt-24 p-10">
-      <div className="z-10 w-full h-full justify-between gap-5 font-mono text-sm flex">
+      <div className="z-10 w-full max-h-screen justify-between gap-5 font-mono text-sm flex">
         {/* EULA & ToS Dialog */}
         <AlertDialog open={showToSDialog}>
           <AlertDialogContent className="max-w-4xl max-h-[600px]">
@@ -509,130 +513,138 @@ export default function Home() {
         </div>
 
         {/* Cart View */}
-        <Card className="w-full">
+        <Card className="w-full flex flex-col justify-between">
           <CardHeader>
             <CardTitle>Cart</CardTitle>
             <CardDescription>Your items:</CardDescription>
           </CardHeader>
-          <CardContent className="h-[350px] overflow-y-scroll">
-            {cart.map((item, index) => (
-              <div
-                key={index}
-                className="flex justify-between items-center border-b border-gray-200 py-2"
-              >
-                <div className="flex items-center">
-                  <div>
-                    <p className="font-semibold">{item.product.product_name}</p>
+          <CardContent className="flex flex-col justify-between items-stretch">
+            <div className="h-[470px] overflow-y-scroll">
+              {cart.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-start border-b border-gray-200 py-2"
+                >
+                  <div className="flex items-center">
+                    <div>
+                      <p className="font-semibold">
+                        {item.product.product_name}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {item.product.brand} - Size: {item.size}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
                     <p className="text-sm text-gray-500">
-                      {item.product.brand} - Size: {item.size}
+                      ₱
+                      {item.product.price.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                      })}
                     </p>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                          <span className="sr-only">Open menu</span>
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuItem onClick={() => removeItem(index)}>
+                          Remove
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 </div>
-                <div className="flex items-center">
-                  <p className="text-sm text-gray-500">
-                    ₱
-                    {item.product.price.toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                    })}
-                  </p>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="h-8 w-8 p-0">
-                        <span className="sr-only">Open menu</span>
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem onClick={() => removeItem(index)}>
-                        Remove
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </CardContent>
-
           <CardFooter className="flex justify-between items-center">
             <div className="flex justify-between items-center">
               <span>Total: ₱{getTotalPrice()}</span>
             </div>
 
-            {/* Checkout Dialog View */}
-            <Dialog>
-              <DialogTrigger onClick={updateDateTime}>
-                <Button>Checkout</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Checkout</DialogTitle>
-                </DialogHeader>
-                <div className="flex flex-col gap-3">
-                  <div className="flex gap-3">
-                    <p className="text-sm text-muted-foreground">
-                      Date & Time:
-                    </p>
-                    <p>{currentDateTime}</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <p className="text-sm text-muted-foreground">Cashier:</p>
-                    <Input
-                      type="text"
-                      placeholder="Cashier Name"
-                      value={cashierName}
-                      onChange={(e) => setCashierName(e.target.value)}
-                      className="h-6"
-                    />
-                  </div>
-                  {/* add a discount/promotion feature here which will be ine a percentage and should be applied to the total below  */}
-                  <div className="flex items-center gap-3">
-                    <p className="text-sm text-muted-foreground">
-                      Discount/Promotion:
-                    </p>
-                    <Input
-                      type="text"
-                      placeholder="CODE"
-                      className="h-6"
-                      value={discountCode}
-                      onChange={handleDiscountCodeChange}
-                    />
-                  </div>
-                  <div className="pt-10">
-                    {cart.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center border-b border-gray-200 py-2"
-                      >
-                        <div className="flex items-center">
-                          <div>
-                            <p className="font-semibold">
-                              {item.product.product_name}
-                            </p>
+            <div className="flex gap-2">
+              <Button variant="ghost" onClick={handleClearCart}>
+                Clear Cart
+              </Button>
+
+              {/* Checkout Dialog View */}
+              <Dialog>
+                <DialogTrigger asChild onClick={updateDateTime}>
+                  <Button>Checkout</Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Checkout</DialogTitle>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex gap-3">
+                      <p className="text-sm text-muted-foreground">
+                        Date & Time:
+                      </p>
+                      <p>{currentDateTime}</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <p className="text-sm text-muted-foreground">Cashier:</p>
+                      <Input
+                        type="text"
+                        placeholder="Cashier Name"
+                        value={cashierName}
+                        onChange={(e) => setCashierName(e.target.value)}
+                        className="h-6"
+                      />
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <p className="text-sm text-muted-foreground">
+                        Discount/Promotion:
+                      </p>
+                      <Input
+                        type="text"
+                        placeholder="CODE"
+                        className="h-6"
+                        value={discountCode}
+                        onChange={handleDiscountCodeChange}
+                      />
+                    </div>
+                    <div className="pt-10">
+                      {cart.map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between items-center border-b border-gray-200 py-2"
+                        >
+                          <div className="flex items-center">
+                            <div>
+                              <p className="font-semibold">
+                                {item.product.product_name}
+                              </p>
+                              <p className="text-sm text-gray-500">
+                                {item.product.brand} - Size: {item.size}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
                             <p className="text-sm text-gray-500">
-                              {item.product.brand} - Size: {item.size}
+                              ₱
+                              {item.product.price.toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                              })}
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center">
-                          <p className="text-sm text-gray-500">
-                            ₱
-                            {item.product.price.toLocaleString(undefined, {
-                              minimumFractionDigits: 2,
-                            })}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                    <div className="flex justify-between items-center pt-10">
+                      <span>Total: ₱{getDiscountedPrice()}</span>
+                      <DialogClose>
+                        <Button>Confirm</Button>
+                      </DialogClose>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center pt-10">
-                    <span>Total: ₱{getDiscountedPrice()}</span>
-                    <DialogClose>
-                      <Button>Confirm</Button>
-                    </DialogClose>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
+                </DialogContent>
+              </Dialog>
+            </div>
           </CardFooter>
         </Card>
       </div>

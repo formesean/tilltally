@@ -43,6 +43,13 @@ interface CartItem {
   size: string;
 }
 
+interface CheckoutData {
+  dateTime: string;
+  cashierName: string;
+  items: CartItem[];
+  total: number;
+}
+
 export default function Home() {
   const router = useRouter();
   const [openItem, setOpenItem] = useState(false);
@@ -132,8 +139,25 @@ export default function Home() {
     setCart([]);
   };
 
+  const handleCheckoutConfirm = () => {
+    const total = parseFloat(getDiscountedPrice().replace(",", ""));
+    const checkoutInfo: CheckoutData = {
+      dateTime: currentDateTime,
+      cashierName: cashierName,
+      items: cart,
+      total: total,
+    };
+
+    const existingCheckoutData = JSON.parse(
+      localStorage.getItem("checkoutData") || "[]"
+    );
+    const updatedCheckoutData = [...existingCheckoutData, checkoutInfo];
+    localStorage.setItem("checkoutData", JSON.stringify(updatedCheckoutData));
+    setCart([]);
+  };
+
   return (
-    <main className="h-screen flex flex-col items-start justify-center pt-24 p-10">
+    <section className="h-screen flex flex-col items-start justify-center pt-24 p-10">
       <Button onClick={handleBack} className="mb-5 px-3">
         <ArrowLeftToLine className="h-4 w-4" />
       </Button>
@@ -161,7 +185,7 @@ export default function Home() {
             <CardDescription>Your items:</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col justify-between items-stretch">
-            <div className="h-[470px] overflow-y-scroll">
+            <div className="h-[400px] overflow-y-scroll">
               {cart.map((item, index) => (
                 <div
                   key={index}
@@ -250,7 +274,7 @@ export default function Home() {
                         onChange={handleDiscountCodeChange}
                       />
                     </div>
-                    <div className="pt-10">
+                    <div className="h-[300px] overflow-y-scroll mt-10">
                       {cart.map((item, index) => (
                         <div
                           key={index}
@@ -279,7 +303,7 @@ export default function Home() {
                     </div>
                     <div className="flex justify-between items-center pt-10">
                       <span>Total: ₱{getDiscountedPrice()}</span>
-                      <DialogClose>
+                      <DialogClose onClick={handleCheckoutConfirm}>
                         <Button>Confirm</Button>
                       </DialogClose>
                     </div>
@@ -321,6 +345,6 @@ export default function Home() {
           </DialogContent>
         </Dialog>
       </div>
-    </main>
+    </section>
   );
 }
